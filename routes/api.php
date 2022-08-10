@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // return the existing styled HTML for some
 Route::get('user/{id}', [UserController::class, 'show']);
+
+//  append the value of 'comments' to the existing comments
+Route::post('user/{id}', [UserController::class, 'store']);

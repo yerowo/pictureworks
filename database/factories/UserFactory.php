@@ -19,7 +19,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'comments' => fake()->safeEmail(),
+            'comments' => fake()->paragraph(),
         ];
     }
 
