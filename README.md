@@ -1,64 +1,49 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Pictureworks Laravel Coding Test
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The project is the migration of a non-OO legacy application into the Laravel/Eloquent framework, This app is using sail a laravel package that helps to easily setup local enviroment.
 
-## About Laravel
+## perquisite to run this application
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+you must have docker and composer on your local machine
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Install application on your local Machine
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Clone the application and run composer install to install all the packages. Edit the .env file.
 
-## Learning Laravel
+## Docker
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+cd into the root of the application and './vendor/bin/sail -up ' to run the aplication
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Run Migration
 
-## Laravel Sponsors
+To run migrations, execute the migrate Artisan './vendor/bin/sail artisan migrate'
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Run Database: Seeding
 
-### Premium Partners
+You may execute the db:seed Artisan command to seed your database 'sail artisan db:seed' or you can target the class specificaly by running './vendor/bin/sail artisan db:seed --class=UserSeeder'
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Vite Dev Server Start
 
-## Contributing
+We need to start the dev server for vite, use the following command 'vendor/bin/sail npm run dev' and it will watch your resources/js/app.js file and resources/css/app.scss file.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## route
 
-## Code of Conduct
+### return the existing styled HTML for some
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Route::get('user/{id}', [UserController::class, 'show']);
 
-## Security Vulnerabilities
+### append the value of 'comments' to the existing comments of the user
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Route::post('user/{id}', [UserController::class, 'store']);
 
-## License
+## visit user
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+visit http://localhost/api/user/{id} where {id} is the id of the user. e.g http://localhost/api/user/1
+
+## POST requests with form fields or JSON
+
+POST requests with form fields or JSON using HTTP/API clients eg Insomnia or Postman this will accept id, static password and comment as params
+
+## Command line executions
+
+Command line excution with id and comments as params. To run this command ' './vendor/bin/sail CreateUserCommand:create {id} {comments}' you type in the id and the comments. eg ./vendor/bin/sail CreateUserCommand:create 1 'add another comments' . This will run the command and append it to user with id 1 comments.
